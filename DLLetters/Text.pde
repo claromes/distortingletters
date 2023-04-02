@@ -29,8 +29,11 @@ class Text {
   }
 
   void drawText() {
-    fill(255);
-    noStroke();
+    noFill();
+    stroke(255);
+    strokeWeight(2);
+    //fill(255);
+    //noStroke();
 
     for (int i = 0; i < letters.length; i++) {
       letters[i].drawLetter();

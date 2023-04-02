@@ -6,7 +6,7 @@ void setup() {
   size(800, 600);
 
   RG.init(this);
-  RG.setPolygonizerLength(3);
+  RG.setPolygonizerLength(5);
 
   String txt = ".pde";
   int textSizePx = 280;

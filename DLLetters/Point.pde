@@ -18,6 +18,7 @@ class Point {
       float distance = mousePos.mag();
       
       if (distance < mouse.radius) {
+        stroke(10);
         pos.add(mouse.vel);
         timer = 0;
       }

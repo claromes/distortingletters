@@ -12,6 +12,8 @@ files: [DLPoints.pde](./DLPoints)
 
 <img src="./DLLetters/DLLetters.gif" width="400">
 
+<img src="./DLLetters/DLLetters_2.gif" width="400">
+
 files: [DLLetters.pde](./DLLetters)
 
 font: [Pixellari by Zacchary Dempsey-Plante](https://github.com/zedseven/Pixellari)
