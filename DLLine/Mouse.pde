@@ -1,25 +1,33 @@
 class Mouse {
-  float radius;
-  PVector pos, vel;
+  float angle = 0;
+  PVector pos;
   
-  Mouse(float r) {
-    radius = r;
-    pos = new PVector(0, 0);
-    vel = new PVector(0, 0);
+  Mouse(float x, float y) {
+    pos = new PVector(x, y);
   }
   
   void update() {
-    PVector newPos = new PVector(mouseX, mouseY);
+    PVector m = new PVector(mouseX, mouseY);
+    PVector mousePos = PVector.sub(m, pos);
     
-    vel = PVector.sub(newPos, pos);
-    vel.mult(0.9);
-    pos = newPos;
+    angle = mousePos.heading();
   }
   
   void drawNewText() {
+    push();
+    
+    translate(pos.x, pos.y);
+    rotate(angle);
+    
     noFill();
     stroke(255, 0, 0);
     strokeWeight(2);
-    circle(pos.x, pos.y, radius*2);
+    line(-width, 0, width, 0);
+    
+    noStroke();
+    fill(255, 0, 0);
+    circle(0, 0, 10);
+    
+    pop();
   }
 }

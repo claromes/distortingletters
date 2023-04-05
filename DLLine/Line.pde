@@ -27,6 +27,12 @@ class Line {
       letters[i].move(m);
     }
   }
+  
+  void linePlay(PVector m) {
+    for (int i = 0; i < letters.length; i++) {
+      if (letters[i] != null) letters[i].letterPlay(m);
+    }
+  }
 
   void drawLine() {
     //noFill();

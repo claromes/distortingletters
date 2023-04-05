@@ -6,20 +6,31 @@ void setup() {
   size(600, 600);
 
   RG.init(this);
-  RG.setPolygonizerLength(10);
+  RG.setPolygonizerLength(3);
 
   String txt = ".pde/.java/.js";
-  int textSizePx = 180;
+  int textSizePx = 100;
   String font = "Pixellari.ttf";
 
   quote = new Text(txt, textSizePx, font);
-  mouse = new Mouse(80);
 }
 
 void draw() {
   background(0);
 
-  mouse.update();
   quote.drawText();
-  mouse.drawNewText();
+  if (mouse != null) {
+    mouse.update();
+    mouse.drawNewText();
+  }
+}
+
+void mousePressed() {
+  mouse = new Mouse(mouseX, mouseY);
+}
+
+void mouseReleased() {
+  quote.textPlay();
+  
+  mouse = null;
 }

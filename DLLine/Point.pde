@@ -1,35 +1,46 @@
 class Point {
-  PVector pos, pos0;
-  int timer = 0, maxTimer = round(random(150));
+  PVector currPos, desiredPos, initPos;
+  int timer = 0, maxTimer = 60;
 
   Point(float x, float y) {
-    pos = new PVector(x, y);
-    pos0 = new PVector(x, y);
+    currPos = new PVector(x, y);
+    desiredPos = new PVector(x, y);
+    initPos = new PVector(x, y);
   }
 
   void move(PVector m) {
-    pos.add(m);
-    pos0.add(m);
+    currPos.add(m);
+    desiredPos.add(m);
+    initPos.add(m);
+  }
+  
+  void pointPlay(PVector m) {
+    if (sizeCheck()) {
+      m = m.copy().mult(-1);
+    }
+    
+    desiredPos.add(m);
+    timer = 0;
+  }
+
+  boolean sizeCheck() {
+    PVector mousePos = PVector.sub(mouse.pos, desiredPos);
+    float angle = mousePos.heading() + TWO_PI;
+    float result = (angle - mouse.angle) % TWO_PI;
+    
+    if (result > PI) return true;
+    else return false;
   }
 
   void update() {
-    if (mousePressed) {
-      PVector mousePos = PVector.sub(pos, mouse.pos);
-      float distance = mousePos.mag();
-      
-      if (distance < mouse.radius) {
-        pos.add(mouse.vel);
-        timer = 0;
-      }
-    }
-    
     if(timer < maxTimer) timer++;
-    else pos.lerp(pos0, 0.1);
+    else desiredPos = initPos.copy();
     
+    currPos.lerp(desiredPos, 0.1);
   }
 
   void drawPoints() {
     update();
-    vertex(pos.x, pos.y);
+    vertex(currPos.x, currPos.y);
   }
 }

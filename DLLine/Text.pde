@@ -17,6 +17,15 @@ class Text {
     }
   }
   
+  void textPlay() {
+    PVector dir = PVector.fromAngle(mouse.angle - HALF_PI);
+    dir.setMag(80);
+    
+    for (int i =0; i < lines.length; i++) {
+      lines[i].linePlay(dir);
+    }
+  }
+  
   void drawText() {
     for (int i =0; i < lines.length; i++) {
       lines[i].drawLine();
