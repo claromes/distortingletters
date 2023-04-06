@@ -8,7 +8,7 @@ void setup() {
   RG.init(this);
   RG.setPolygonizerLength(3);
 
-  String txt = ".pde/.java/.js";
+  String txt = ".pde/.java/.js/.py";
   int textSizePx = 100;
   String font = "Pixellari.ttf";
 
@@ -21,6 +21,7 @@ void draw() {
   quote.drawText();
   if (mouse != null) {
     mouse.update();
+    quote.textPlay();
     mouse.drawNewText();
   }
 }
@@ -33,4 +34,12 @@ void mouseReleased() {
   quote.textPlay();
   
   mouse = null;
+}
+
+void keyReleased() {
+  if (key == ' ') save();
+}
+
+void save() {
+  saveFrame("DL-#####.png");
 }
