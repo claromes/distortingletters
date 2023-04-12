@@ -15,18 +15,18 @@ class Point {
   }
   
   void pointPlay(PVector m) {
-    float noise = noise(desiredPos.x * 0.002, desiredPos.y * 0.002);
-    if (sizeCheck()) {
-      m = m.copy().mult(-noise);
-    } else m = m.copy().mult(noise);
+    if (checkSide() && mouse.radiusVel > 0 || !checkSide() && mouse.radiusVel < 0){
+      PVector posCenter = PVector.sub(desiredPos, mouse.center);
+      posCenter.rotate(mouse.angleVel * 0.9);
+      posCenter.setMag(posCenter.mag() + mouse.radiusVel * 0.9);
+      desiredPos = PVector.add(posCenter, mouse.center);
+    }
     
-    //desiredPos.add(m);
-    desiredPos = PVector.add(m, initPos);
     timer = 0;
   }
 
   boolean checkSide() {
-    PVector mousePos = PVector.sub(mouse.pos, initPos);
+    PVector mousePos = PVector.sub(mouse.pos, desiredPos);
     float angle = mousePos.heading() + TWO_PI;
     float result = (angle - mouse.angle) % TWO_PI;
     
