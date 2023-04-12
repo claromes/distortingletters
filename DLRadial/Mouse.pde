@@ -1,17 +1,21 @@
 class Mouse {
   float angle = 0, radius =0, angleVel = 0, radiusVel = 0;
-  PVector pos, center;
+  PVector pos, center, vel;
   
   Mouse() {
     pos = new PVector(0, 0);
     center = new PVector(width * 0.5, height * 0.5);
+    vel = new PVector(0 ,0);
   }
   
   void update() {
     float initAngle = angle;
     float initRadius = radius;
     
+    PVector initPos = pos.copy();
     pos.set(mouseX, mouseY);
+    vel = PVector.sub(pos, initPos);
+    
     PVector posCenter = PVector.sub(pos, center);
     
     angle = posCenter.heading() - HALF_PI;

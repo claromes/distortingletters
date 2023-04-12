@@ -1,6 +1,6 @@
 class Point {
   PVector currPos, desiredPos, initPos;
-  int timer = 0, maxTimer = 60;
+  int timer = 0, maxTimer = 90;
 
   Point(float x, float y) {
     currPos = new PVector(x, y);
@@ -16,10 +16,13 @@ class Point {
   
   void pointPlay(PVector m) {
     if (checkSide() && mouse.radiusVel > 0 || !checkSide() && mouse.radiusVel < 0){
-      PVector posCenter = PVector.sub(desiredPos, mouse.center);
-      posCenter.rotate(mouse.angleVel * 0.9);
-      posCenter.setMag(posCenter.mag() + mouse.radiusVel * 0.9);
-      desiredPos = PVector.add(posCenter, mouse.center);
+      //PVector posCenter = PVector.sub(desiredPos, mouse.center);
+      //posCenter.rotate(mouse.angleVel * 0.9);
+      //posCenter.setMag(posCenter.mag() + mouse.radiusVel * 0.9);
+      //desiredPos = PVector.add(posCenter, mouse.center);
+      PVector v = mouse.vel.copy();
+      v.mult(0.9);
+      desiredPos.add(v);
     }
     
     timer = 0;
