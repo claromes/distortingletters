@@ -12,9 +12,7 @@ class Mouse {
     float initAngle = angle;
     float initRadius = radius;
     
-    PVector initPos = pos.copy();
     pos.set(mouseX, mouseY);
-    vel = PVector.sub(pos, initPos);
     
     PVector posCenter = PVector.sub(pos, center);
     
@@ -35,16 +33,5 @@ class Mouse {
     strokeWeight(2);
     line(pos.x, pos.y, center.x, center.y);
     
-    push();
-    
-    translate(pos.x, pos.y);
-    rotate(angle);
-    
-    noFill();
-    stroke(255, 0, 0);
-    strokeWeight(2);
-    line(-width, 0, width, 0);
-    
-    pop();
-  }
-}
+    circle(center.x, center.y, radius * 2);
+  } }

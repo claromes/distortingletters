@@ -42,7 +42,7 @@ class Letter {
   void letterPlay(PVector m) {
     for (int i = 0; i < points.length; i++) {
       for (int j = 0; j < points[i].length; j++) {
-        points[i][j].pointPlay(m);
+        points[i][j].pointPlay();
       }
     }
   }

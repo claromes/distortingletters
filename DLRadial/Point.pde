@@ -1,6 +1,6 @@
 class Point {
   PVector currPos, desiredPos, initPos;
-  int timer = 0, maxTimer = 90;
+  int timer = 0, maxTimer = 60;
 
   Point(float x, float y) {
     currPos = new PVector(x, y);
@@ -14,15 +14,15 @@ class Point {
     initPos.add(m);
   }
   
-  void pointPlay(PVector m) {
-    if (checkSide() && mouse.radiusVel > 0 || !checkSide() && mouse.radiusVel < 0){
-      //PVector posCenter = PVector.sub(desiredPos, mouse.center);
-      //posCenter.rotate(mouse.angleVel * 0.9);
-      //posCenter.setMag(posCenter.mag() + mouse.radiusVel * 0.9);
-      //desiredPos = PVector.add(posCenter, mouse.center);
-      PVector v = mouse.vel.copy();
-      v.mult(0.9);
-      desiredPos.add(v);
+  void pointPlay() {
+    PVector posCenter = PVector.sub(desiredPos, mouse.center);
+    float distance = posCenter.mag();
+    
+    if (!checkRadius(distance) && mouse.radiusVel > 0 || checkRadius(distance) && mouse.radiusVel < 0) {
+      
+      posCenter.rotate(mouse.angleVel * 0.9);
+      posCenter.setMag(distance + mouse.radiusVel * 0.9);
+      desiredPos = PVector.add(posCenter, mouse.center);
     }
     
     timer = 0;
@@ -34,6 +34,11 @@ class Point {
     float result = (angle - mouse.angle) % TWO_PI;
     
     if (result > PI) return true;
+    else return false;
+  }
+  
+  boolean checkRadius(float d) {
+    if (d < mouse.radius) return true;
     else return false;
   }
 
